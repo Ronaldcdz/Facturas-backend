@@ -1,5 +1,5 @@
-import { Expose, Transform } from 'class-transformer';
-import { Cliente } from '../entities/cliente.entity';
+import { Expose, Type } from 'class-transformer';
+import { ListCiudadDto } from 'src/ciudades/dto/list-ciudad.dto';
 
 export class ListClienteDto {
   @Expose()
@@ -12,6 +12,15 @@ export class ListClienteDto {
   rnc: string;
 
   @Expose()
-  @Transform(({ obj }: { obj: Cliente }) => obj.ciudad?.nombre || null)
-  ciudad: string;
+  direccion: string;
+
+  @Expose()
+  correo: string;
+
+  @Expose()
+  telefono: string;
+
+  @Expose()
+  @Type(() => ListCiudadDto)
+  ciudad: ListCiudadDto;
 }

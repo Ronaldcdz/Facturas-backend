@@ -6,7 +6,6 @@ import { Cliente } from './entities/cliente.entity';
 import { Repository } from 'typeorm';
 import { ListClienteDto } from './dto/list-cliente.dto';
 import { plainToInstance } from 'class-transformer';
-import { DetailClienteDto } from './dto/detail-cliente.dto';
 
 @Injectable()
 export class ClientesService {
@@ -15,11 +14,11 @@ export class ClientesService {
     private readonly clienteRepository: Repository<Cliente>,
   ) {}
 
-  async create(createClienteDto: CreateClienteDto): Promise<DetailClienteDto> {
+  async create(createClienteDto: CreateClienteDto): Promise<ListClienteDto> {
     const nuevoCliente = this.clienteRepository.create(createClienteDto);
     const clienteGuardado = await this.clienteRepository.save(nuevoCliente);
 
-    return plainToInstance(DetailClienteDto, clienteGuardado, {
+    return plainToInstance(ListClienteDto, clienteGuardado, {
       excludeExtraneousValues: true,
     });
   }
@@ -27,7 +26,9 @@ export class ClientesService {
   async findAll(): Promise<ListClienteDto[]> {
     const clientes: Cliente[] = await this.clienteRepository.find({
       relations: {
-        ciudad: true,
+        ciudad: {
+          provincia: true,
+        },
       },
     });
     return plainToInstance(ListClienteDto, clientes, {
@@ -35,7 +36,7 @@ export class ClientesService {
     });
   }
 
-  async findOne(id: number): Promise<DetailClienteDto> {
+  async findOne(id: number): Promise<ListClienteDto> {
     const cliente: Cliente | null = await this.clienteRepository.findOne({
       where: { id },
       relations: {
@@ -45,8 +46,8 @@ export class ClientesService {
     if (!cliente) {
       throw new NotFoundException(`Cliente #${id} no encontrado`);
     }
-    const clienteDto: DetailClienteDto = plainToInstance(
-      DetailClienteDto,
+    const clienteDto: ListClienteDto = plainToInstance(
+      ListClienteDto,
       cliente,
       {
         excludeExtraneousValues: true,
@@ -57,10 +58,7 @@ export class ClientesService {
   }
 
   async update(id: number, updateClienteDto: UpdateClienteDto) {
-    const cliente = await this.clienteRepository.preload({
-      id: id,
-      ...updateClienteDto,
-    });
+    const cliente = await this.clienteRepository.preload(updateClienteDto);
 
     if (!cliente) {
       throw new NotFoundException(`Cliente #${id} no encontrado`);

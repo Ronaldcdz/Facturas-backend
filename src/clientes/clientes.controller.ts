@@ -36,7 +36,10 @@ export class ClientesController {
     @Param('id', ParseIntPipe) id: number,
     @Body() updateClienteDto: UpdateClienteDto,
   ) {
-    return this.clientesService.update(id, updateClienteDto);
+    const res = this.clientesService.update(id, updateClienteDto);
+    console.log('respuestna a devolver');
+    console.log(res);
+    return res;
   }
 
   @Delete(':id')
