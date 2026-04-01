@@ -15,7 +15,7 @@ export class Cliente {
   @Column({ length: 100 })
   nombre: string;
 
-  @Column({ length: 15 })
+  @Column({ length: 15, unique: true })
   rnc: string;
 
   @Column({ length: 100, nullable: true })
