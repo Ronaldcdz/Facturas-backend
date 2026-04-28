@@ -1,4 +1,4 @@
-import { Ciudad } from 'src/ciudades/entities/ciudad.entity';
+import { Ciudad } from '../../ciudades/entities/ciudad.entity';
 import { Entity, PrimaryColumn, Column, OneToMany } from 'typeorm';
 
 // En provincia.entity.ts

@@ -1,5 +1,5 @@
 import { Expose, Type } from 'class-transformer';
-import { ListCiudadDto } from 'src/ciudades/dto/list-ciudad.dto';
+import { ListCiudadDto } from '../../ciudades/dto/list-ciudad.dto';
 
 export class ListClienteDto {
   @Expose()

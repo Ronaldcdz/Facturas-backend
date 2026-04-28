@@ -1,4 +1,4 @@
-import { Provincia } from 'src/provincias/entities/provincia.entity';
+import { Provincia } from '../../provincias/entities/provincia.entity';
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm';
 
 @Entity('ciudades')
