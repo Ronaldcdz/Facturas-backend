@@ -1,5 +1,5 @@
 import { Expose, Type } from 'class-transformer';
-import { MiniCiudadDto } from 'src/ciudades/dto/mini-ciudad.dto';
+import { MiniCiudadDto } from '../../ciudades/dto/mini-ciudad.dto';
 
 export class ListProvinciaDto {
   @Expose()

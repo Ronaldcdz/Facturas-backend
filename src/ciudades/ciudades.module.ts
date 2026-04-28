@@ -4,7 +4,7 @@ import { CiudadesController } from './ciudades.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Ciudad } from './entities/ciudad.entity';
 import { CiudadesSeedService } from './ciudades-seed.service';
-import { ProvinciasModule } from 'src/provincias/provincias.module';
+import { ProvinciasModule } from '../provincias/provincias.module';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Ciudad]), ProvinciasModule],
