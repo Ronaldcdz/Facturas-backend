@@ -14,8 +14,6 @@ const config: TypeOrmModuleOptions = {
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
   autoLoadEntities: true,
-  entities: [join(process.cwd(), 'src/**/*.entity.ts')],
-  migrations: [join(process.cwd(), 'src/migrations/*.ts')],
   ssl:
     process.env.NODE_ENV === 'production'
       ? { rejectUnauthorized: false }
@@ -23,4 +21,8 @@ const config: TypeOrmModuleOptions = {
 };
 
 export default registerAs('typeorm', () => config);
-export const connectionSource = new DataSource(config as DataSourceOptions);
+export const connectionSource = new DataSource({
+  ...config,
+  entities: [join(process.cwd(), 'src/**/*.entity.ts')],
+  migrations: [join(process.cwd(), 'src/migrations/*.ts')],
+} as DataSourceOptions);
