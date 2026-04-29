@@ -7,12 +7,13 @@ import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { ProductosModule } from './productos/productos.module';
 import { ProvinciasModule } from './provincias/provincias.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import typeorm from './typeorm';
+import typeorm from './config/typeorm.config';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       load: [typeorm],
+      isGlobal: true,
     }),
     TypeOrmModule.forRootAsync({
       inject: [ConfigService],
