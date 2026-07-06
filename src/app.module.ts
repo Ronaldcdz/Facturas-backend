@@ -7,6 +7,8 @@ import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { ProductosModule } from './productos/productos.module';
 import { ProvinciasModule } from './provincias/provincias.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { AuthModule } from './auth/auth.module';
+import { UsuarioModule } from './usuario/usuario.module';
 import typeorm from './config/typeorm.config';
 
 @Module({
@@ -24,6 +26,8 @@ import typeorm from './config/typeorm.config';
     CiudadesModule,
     ProvinciasModule,
     ProductosModule,
+    AuthModule,
+    UsuarioModule,
   ],
   controllers: [AppController],
   providers: [AppService],
